@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        table{
+            margin: 0;
+            padding: 0;
+            min-width: 350px;
+            width: 30% ;
+            margin-left: 30%;
+            table-layout: fixed;
+            overflow: hidden;
+        }
+        #inp{
+            border: 1px solid gray;
+            text-align: right;
+            padding-right: 10px;
+            border-radius: 10px;
+            height: 50px;
+            font-size: 30px;
+        }
+        #inp p{
+            font-size: 15px;
+            color: gray;
+        }
+        td{
+            text-align: center;
+            border-radius: 5px;
+            height: 35px;
+            width: 20%;
+            padding: 0%;
+        }
+        .operations{
+            background-color: #DADCE0;
+        }
+        .operand{
+            background-color: #F1F3F4;
+        }
+        .calc{
+            background-color: #4285F4;
+        }
+    </style>
+</head>
+<body>
+        <table>
+            
+            <tr>
+                <td id="inp" colspan="4">
+                    0
+                </td>
+            </tr>
+            <tr>
+                <td class="operations" onclick="opr('(')">(</td>
+                <td class="operations" onclick="opr(')')">)</td>
+                <td class="operations" onclick="opr('%')">%</td>
+                <td class="operations" onclick="opr('AC')">AC</td>
+            </tr>
+            <tr>
+                <td class="operand" onclick="add(7)">7</td>
+                <td class="operand" onclick="add(8)">8</td>
+                <td class="operand" onclick="add(9)">9</td>
+                <td class="operations" onclick="opr('/')">/</td>
+            </tr>
+            <tr>
+                <td class="operand" onclick="add(4)">4</td>
+                <td class="operand" onclick="add(5)">5</td>
+                <td class="operand" onclick="add(6)">6</td>
+                <td class="operations" onclick="opr('*')">*</td>
+            </tr>
+            <tr>
+                <td class="operand" onclick="add(1)">1</td>
+                <td class="operand" onclick="add(2)">2</td>
+                <td class="operand" onclick="add(3)">3</td>
+                <td class="operations" onclick="opr('-')">-</td>
+            </tr>
+            <tr>
+                <td class="operand" onclick="add(0)">0</td>
+                <td class="operand" onclick="add('.')">.</td>
+                <td class="calc" onclick="res()">=</td>
+                <td class="operations" onclick="opr('+')">+</td>
+            </tr>
+        </table>
+        <script>
+            var isVal = false;
+            function add(p) {
+                var x = document.getElementById('inp')
+                if(x.innerText == 0 || isVal)
+                    x.innerText=p
+                else{
+                    x.innerText+=p
+                }
+                isVal=false
+            }
+            function opr(p) {
+                var x = document.getElementById('inp')
+                if(p == 'AC')
+                    x.innerText=0;
+                else if(x.innerText==0 && (p=='(' || p==')')){
+                    x.innerText=p
+                }
+                else{
+                    x.innerText+=p
+                }
+                isVal=false
+            }
+            function res() {
+                var x = document.getElementById('inp')
+                
+                try {   
+                    var r = eval(x.innerText)
+                    x.innerText = r
+                    isVal=true
+
+                } catch (error) {
+                    console.log(error)
+                    x.innerText='Syntax Error'
+                }
+            }
+        </script>
+</body>
+</html>
